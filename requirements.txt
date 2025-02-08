@@ -1,6 +1,9 @@
 pandas
 numpy
 seaborn
--e .
+matplotlib
+catboost
+
+#-e . #Comment when installing new library for now. At the end, we will install using -e altogether.
 
 #To automatically trigger setup.py file
