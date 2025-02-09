@@ -3,6 +3,9 @@ numpy
 seaborn
 matplotlib
 catboost
+scikit-learn #
+# xgboost
+# dill
 
 #-e . #Comment when installing new library for now. At the end, we will install using -e altogether.
 
