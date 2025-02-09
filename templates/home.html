@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Walmart Sales Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Walmart Weekly Sales Prediction</h1>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            <label for="store">Store Number</label>
+            <input type="number" name="store" id="store" placeholder="Enter store number" required>
+
+            <label for="dept">Department Number</label>
+            <input type="number" name="dept" id="dept" placeholder="Enter department number" required>
+
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" required>
+
+            <label for="is_holiday">Is it a Holiday?</label>
+            <select name="is_holiday" id="is_holiday" required>
+                <option value="" selected disabled>Select an option</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+            </select>
+
+            <input class="btn" type="submit" value="Predict Weekly Sales">
+        </form>
+
+        {% if results is not none %}
+            <div class="result">
+                <h2>Predicted Weekly Sales: {{ results }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

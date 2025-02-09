@@ -21,6 +21,34 @@ class DataIngestionConfig:
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
+
+    def merge_dataframes(self, df_train):
+        """Merge train data with store and feature datasets."""
+        try:
+            logging.info("Merging train data with store and feature datasets.")
+            df_store = pd.read_csv('notebook/data/stores.csv')
+            df_feature = pd.read_csv('notebook/data/features.csv')
+
+            # Merge train data with store details
+            df_merge = pd.merge(df_train, df_store, on='Store', how='inner')
+
+            # Convert Date columns to datetime format
+            df_merge['Date'] = pd.to_datetime(df_merge['Date'])
+            df_feature['Date'] = pd.to_datetime(df_feature['Date'])
+
+            # Drop 'IsHoliday' column from features to avoid redundancy
+            df_feature.drop(columns=['IsHoliday'], axis=1, inplace=True)
+
+            # Merge with feature dataset on 'Store' and 'Date'
+            df_merge = pd.merge(df_merge, df_feature, on=['Store', 'Date']) #, how='left'
+            # df_merge['Date'] = pd.to_datetime(df_merge['Date']) #
+            logging.info("Dataframes merged successfully.")
+
+            return df_merge
+
+        except Exception as e:
+            raise CustomException(e, sys)
+        
     
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
@@ -28,20 +56,24 @@ class DataIngestion:
             # Convert csv to df
             df_train = pd.read_csv('notebook/data/train.csv')
             # df_test = pd.read_csv('notebook/data/test.csv')
-            df_store = pd.read_csv('notebook/data/stores.csv')
-            df_feature = pd.read_csv('notebook/data/features.csv')
+
+            # df_store = pd.read_csv('notebook/data/stores.csv')
+            # df_feature = pd.read_csv('notebook/data/features.csv')
             logging.info("Read the dataset as dataframe")
 
-            # Construct the full dataset
-            df_merge = pd.merge(df_train, df_store, on='Store') #inner join
+            # # Construct the full dataset
+            # df_merge = pd.merge(df_train, df_store, on='Store') #inner join
 
-            df_merge['Date'] = pd.to_datetime(df_merge['Date'])
-            df_feature['Date'] = pd.to_datetime(df_feature['Date'])
+            # df_merge['Date'] = pd.to_datetime(df_merge['Date'])
+            # df_feature['Date'] = pd.to_datetime(df_feature['Date'])
 
-            df_feature.drop(columns=['IsHoliday'], axis=1, inplace=True)
-            df_merge = pd.merge(df_merge, df_feature, on=['Store', 'Date'])
-            # df_merge['Date'] = pd.to_datetime(df_merge['Date']) #
-            logging.info("Merge dataframe to form full dataset")
+            # df_feature.drop(columns=['IsHoliday'], axis=1, inplace=True)
+            # df_merge = pd.merge(df_merge, df_feature, on=['Store', 'Date'])
+            # # df_merge['Date'] = pd.to_datetime(df_merge['Date']) #
+            # logging.info("Merge dataframe to form full dataset")
+
+            # Merge datasets
+            df_merge = self.merge_dataframes(df_train)
 
             # os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
             # df_merge.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
@@ -78,11 +110,11 @@ if __name__ == "__main__":
     # Apply transformation
     data_transformation = DataTransformation()
     train_data, test_data = data_transformation.initiate_data_transformation(train_data, test_data)
-    # print(train_data.info())
+    print(train_data.info())
 
-    # # Train model
-    modeltrainer = ModelTrainer()
-    r2_score, mae_score = modeltrainer.initiate_model_trainer(train_data, test_data)
-    print(f"r2 score: {r2_score}")
-    print(f"MAE score: {mae_score}")
+    # # # Train model
+    # modeltrainer = ModelTrainer()
+    # r2_score, mae_score = modeltrainer.initiate_model_trainer(train_data, test_data)
+    # print(f"r2 score: {r2_score}")
+    # print(f"MAE score: {mae_score}")
 
