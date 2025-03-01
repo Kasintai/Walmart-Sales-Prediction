@@ -1,5 +1,6 @@
 # Walmart Weekly Sales Prediction - End-to-End ML Project
 <br/>
+
 ## Project Overview:
 This project is an end-to-end machine learning system designed to predict weekly sales for Walmart stores based on historical data. It integrates machine learning, web development, database management, and cloud deployment to provide users with real-time sales predictions.
 <br/>
@@ -20,7 +21,7 @@ This project is an end-to-end machine learning system designed to predict weekly
 - **Performance Metrics:**
   - R² Score: 0.86
   - RMSE: 8,454
-\
+<br/>
 
 ### 2. Web Application (Flask + HTML/CSS/JS)
 
@@ -32,7 +33,7 @@ This project is an end-to-end machine learning system designed to predict weekly
 - **Backend:**
   - Flask API to handle user inputs and serve predictions.
   - Stores user inputs and predictions in PostgreSQL.
-\
+<br/>
 
 ### 3. Database (PostgreSQL)
 
@@ -40,7 +41,7 @@ This project is an end-to-end machine learning system designed to predict weekly
 - Schema: Stores predictions with fields (store number, department, date, holiday status, predicted sales, timestamp).
 - Manual Clearing: Users can reset the database via a "Refresh Database" button.
 - No data retention policy yet, meaning all predictions accumulate over time.
-\
+<br/>
 
 ### 4. Cloud Deployment (AWS ECS + Fargate)
 
@@ -52,7 +53,7 @@ This project is an end-to-end machine learning system designed to predict weekly
 - **Current Scaling Setup:**
   - Runs one ECS task, meaning no autoscaling is enabled.
   - Future improvements may involve adding load balancing or Redis caching.
-\
+<br/>
 
 ### 5. CI/CD Pipeline (GitHub Actions)
 
@@ -66,7 +67,7 @@ This project is an end-to-end machine learning system designed to predict weekly
   - ❌ Automated Testing (Unit/API tests)
   - ❌ Linting & Code Quality Checks (black, pylint, flake8)
   - ❌ Security Scanning (Docker vulnerabilities)
- \
+ <br/>
  
 ### Next Steps & Possible Improvements
 - **Improve Model Performance**
