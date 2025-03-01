@@ -4,17 +4,21 @@
 This project is an end-to-end machine learning system designed to predict weekly sales for Walmart stores based on historical data. It integrates machine learning, web development, database management, and cloud deployment to provide users with real-time sales predictions.
 
 ## Key Components
-1. Machine Learning Model (CatBoost Regressor)
+1. Machine Learning Model
 
-Goal: Predict weekly sales for each Walmart store.
-Dataset Used: Kaggle's Walmart dataset (train.csv, test.csv, stores.csv, features.csv).
-Feature Engineering:
-Extracted Year, Month, Day, and Day of the Week from dates.
-Applied sin/cos transformations for seasonality.
-Merged store and feature datasets for richer insights.
-Performance Metrics:
-R² Score: 0.86
-RMSE: 8,454
+- Goal: Predict weekly sales for each Walmart store.
+- Dataset: Kaggle's Walmart dataset (train.csv, test.csv, stores.csv, features.csv).
+
+- Feature Engineering:
+  - Merged train/test datasets with stores and features datasets for richer insights.
+  - Extracted Year, Month, Day, and Day of the Week from dates.
+  - Cyclical encode: Applying sin/cos transformations to capture seasonality.
+
+- Model: CatBoost Regressor
+
+- Performance Metrics:
+  - R² Score: 0.86
+  - RMSE: 8,454
 
 
 2. Web Application (Flask + HTML/CSS/JS)
