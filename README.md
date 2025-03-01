@@ -10,6 +10,7 @@ This project is an end-to-end machine learning system designed to predict weekly
 
 - **Goal:** Predict weekly sales for each Walmart store.
 - **Dataset:** Kaggle's Walmart dataset (train.csv, test.csv, stores.csv, features.csv).
+  - https://www.kaggle.com/competitions/walmart-recruiting-store-sales-forecasting
 
 - **Feature Engineering:**
   - Merged train/test datasets with stores and features datasets for richer insights.
