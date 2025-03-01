@@ -53,17 +53,60 @@
             font-weight: bold;
             margin-top: 20px;
         }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+        }
+        .instructions ul {
+            padding-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Walmart Weekly Sales Prediction</h1>
+
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p>Please follow these guidelines when entering values:</p>
+            <ul>
+                <li><strong>Store Number:</strong> Enter a valid store number (e.g., between 1 and 45).</li>
+                <li><strong>Department Number:</strong> Enter a valid department number (e.g., between 1 and 98).</li>
+                <li><strong>Date:</strong> Only the following range of Fridays are valid:</li>
+                <ul>
+                    <li>November 2, 2012 up to July 26, 2013</li>
+                </ul>
+                <li><strong>Is it a Holiday?</strong> Select "Yes" if the date is a recognized holiday, otherwise select "No".</li>
+            </ul>
+        </div>
+
         <form action="{{ url_for('predict_datapoint') }}" method="post">
             <label for="store">Store Number</label>
-            <input type="number" name="store" id="store" placeholder="Enter store number" required>
+            <input type="number" name="store" id="store" placeholder="Enter store number" required min="1" max="45">
 
             <label for="dept">Department Number</label>
-            <input type="number" name="dept" id="dept" placeholder="Enter department number" required>
+            <input type="number" name="dept" id="dept" placeholder="Enter department number" required min="1" max="98">
 
             <label for="date">Date</label>
             <input type="date" name="date" id="date" required>
@@ -83,6 +126,95 @@
                 <h2>Predicted Weekly Sales: {{ results }}</h2>
             </div>
         {% endif %}
+
+        <!-- 🔹 Predictions Table (Added Below the Form) -->
+        <h2>Previous Predictions</h2>
+        <table>
+            <tr>
+                <th>Store</th>
+                <th>Department</th>
+                <th>Date</th>
+                <th>Holiday</th>
+                <th>Predicted Sales</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for p in predictions %}
+            <tr>
+                <td>{{ p.store_number }}</td>
+                <td>{{ p.department_number }}</td>
+                <td>{{ p.date }}</td>
+                <td>{{ p.is_holiday }}</td>
+                <td>{{ p.predicted_sales }}</td>
+                <td>{{ p.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- "Refresh Database" button (no form) -->
+        <button id="refresh-btn" style="margin-top: 20px;">Refresh Database</button>
+
+        <script>
+        document.getElementById('refresh-btn').addEventListener('click', function() {
+            // Send a POST request to /refresh
+            fetch('/refresh', {
+            method: 'POST'
+            })
+            .then(response => {
+            if (response.ok) {
+                // You can display an alert, or reload the page to see an empty table
+                alert('Database table refreshed!');
+                // Optionally, refresh the page (to see the cleared table):
+                // location.reload();
+            } else {
+                alert('Failed to refresh the database table');
+            }
+            })
+            .catch(error => {
+            alert('Error refreshing: ' + error);
+            });
+        });
+        </script>
+
+
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const validDates = [
+                '2012-11-02', '2012-11-09', '2012-11-16', '2012-11-23',
+                '2012-11-30', '2012-12-07', '2012-12-14', '2012-12-21',
+                '2012-12-28', '2013-01-04', '2013-01-11', '2013-01-18',
+                '2013-01-25', '2013-02-01', '2013-02-08', '2013-02-15',
+                '2013-02-22', '2013-03-01', '2013-03-08', '2013-03-15',
+                '2013-03-22', '2013-03-29', '2013-04-05', '2013-04-12',
+                '2013-04-19', '2013-04-26', '2013-05-03', '2013-05-10',
+                '2013-05-17', '2013-05-24', '2013-05-31', '2013-06-07',
+                '2013-06-14', '2013-06-21', '2013-06-28', '2013-07-05',
+                '2013-07-12', '2013-07-19', '2013-07-26'
+            ];
+
+            const dateInput = document.getElementById("date");
+
+            // Validate that user selects only allowed dates (Fridays)
+            dateInput.addEventListener("blur", function () {
+                if (this.value && !validDates.includes(this.value)) {
+                    alert("Invalid date selected! Please choose a valid Friday from the instructions.");
+                    this.value = ""; // Clear invalid date
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function () {
+                setTimeout(function () {
+                    form.querySelector("input[type='submit']").disabled = true;
+                }, 100);  // Prevent multiple clicks
+            });
+        });
+    </script>
+
 </body>
 </html>

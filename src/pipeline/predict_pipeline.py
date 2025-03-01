@@ -7,6 +7,8 @@ from src.utils import load_object
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 
+from src.database import save_prediction  # Import the save function
+
 class PredictPipeline:
     def __init__(self):
         pass
@@ -33,7 +35,20 @@ class PredictPipeline:
             # print(merge_df.info())
 
             preds = model.predict(merge_df)
+
+            #####
+            # Store prediction in PostgreSQL
+            store_number = features["Store"][0]
+            department_number = features["Dept"][0]
+            date = features["Date"][0]
+            is_holiday = features["IsHoliday"][0]
+            predicted_sales = preds[0]  # First prediction from model output
+
+            save_prediction(store_number, department_number, date, is_holiday, predicted_sales)
+            #####
+
             return preds
+            #return predicted_sales
         
         except Exception as e:
             raise CustomException(e,sys)
@@ -59,6 +74,7 @@ class CustomData:
                 "IsHoliday": [self.is_holiday]
             }
             return pd.DataFrame(data_dict)
+        
         except Exception as e:
             raise CustomException(e, sys)
 
