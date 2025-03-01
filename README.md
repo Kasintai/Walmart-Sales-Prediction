@@ -1,6 +1,6 @@
 # Walmart Weekly Sales Prediction - End-to-End ML Project
 <br/>
-<div style="display: flex; justify-content: center;">
+<div style="text-align: center;">
     <img width="666" alt="Image" src="https://github.com/user-attachments/assets/9dd81b8c-da73-445a-8abd-3447a8f47eb3" />
 </div>
 
