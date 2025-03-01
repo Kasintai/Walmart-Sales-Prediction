@@ -57,11 +57,11 @@ This project is an end-to-end machine learning system designed to predict weekly
 
 ### 5. CI/CD Pipeline (GitHub Actions)
 
-- **✅Continuous Integration (CI):**
+- **Continuous Integration (CI):**
   - Triggers on push to main branch.
   - Builds and pushes Docker image to AWS ECR.
 
-- **✅Continuous Deployment (CD):**
+- **Continuous Deployment (CD):**
   - Updates ECS Service to deploy the latest Docker image.
   - Missing CI Enhancements:
   - ❌ Automated Testing (Unit/API tests)
