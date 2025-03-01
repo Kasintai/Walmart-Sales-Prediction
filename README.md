@@ -1,6 +1,6 @@
 # Walmart Weekly Sales Prediction - End-to-End ML Project
 <br/>
-![Uploading Walmart front-end.png…]()
+<img width="666" alt="Image" src="https://github.com/user-attachments/assets/9dd81b8c-da73-445a-8abd-3447a8f47eb3" />
 
 ## Project Overview:
 This project is an end-to-end machine learning system designed to predict weekly sales for Walmart stores based on historical data. It integrates machine learning, web development, database management, and cloud deployment to provide users with real-time sales predictions.
