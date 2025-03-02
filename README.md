@@ -1,9 +1,8 @@
 # Walmart Weekly Sales Prediction - End-to-End ML Project
 <br/>
 
-http://load-balancer1-1863200110.ap-southeast-2.elb.amazonaws.com/predictdata
-
 <p align="center">
+  http://load-balancer1-1863200110.ap-southeast-2.elb.amazonaws.com/predictdata
   <img width="666" alt="Image" src="https://github.com/user-attachments/assets/9dd81b8c-da73-445a-8abd-3447a8f47eb3" />
 </p>
 
