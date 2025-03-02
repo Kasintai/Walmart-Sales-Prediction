@@ -3,8 +3,11 @@
 
 <p align="center">
   <img width="666" alt="Image" src="https://github.com/user-attachments/assets/9dd81b8c-da73-445a-8abd-3447a8f47eb3" />
-  
-  <http://load-balancer1-1863200110.ap-southeast-2.elb.amazonaws.com/predictdata/>
+</p>
+<p align="center">
+  <a href="http://load-balancer1-1863200110.ap-southeast-2.elb.amazonaws.com/predictdata">
+    http://load-balancer1-1863200110.ap-southeast-2.elb.amazonaws.com/predictdata
+  </a>
 </p>
 
 ## Project Overview:
