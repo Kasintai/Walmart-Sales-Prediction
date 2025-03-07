@@ -30,7 +30,6 @@ This project is an end-to-end machine learning system designed to predict weekly
 
 - **Performance Metrics:**
   - R² Score: 0.86
-  - RMSE: 8,454
 <br/>
 
 ### 2. Web Application (Flask + HTML/CSS/JS)
@@ -74,21 +73,5 @@ This project is an end-to-end machine learning system designed to predict weekly
 - **Continuous Deployment (CD):**
   - Updates ECS Service to deploy the latest Docker image.
   - Missing CI Enhancements:
-  - ❌ Automated Testing (Unit/API tests)
-  - ❌ Linting & Code Quality Checks (black, pylint, flake8)
-  - ❌ Security Scanning (Docker vulnerabilities)
  <br/>
- 
-### Next Steps & Possible Improvements
-- **Improve Model Performance**
-  - Tune CatBoost hyperparameters using Optuna.
-  - Add lag-based features and moving averages for better time-series predictions.
- 
-- **Enhance Deployment & Scaling**
-  - Enable ECS Auto-Scaling for better performance.
-  - Implement Redis caching to optimize repeated queries.
 
-- **Strengthen CI/CD Pipeline**
-  - Add unit tests (pytest) to validate API behavior.
-  - Implement static code analysis to maintain quality.
-  - Introduce security scanning for Docker images.
